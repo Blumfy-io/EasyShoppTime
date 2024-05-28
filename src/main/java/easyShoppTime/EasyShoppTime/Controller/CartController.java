@@ -1,6 +1,7 @@
 package easyShoppTime.EasyShoppTime.Controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,12 +63,27 @@ public class CartController {
      */
     
 	@GetMapping
+	 @CrossOrigin(origins = "http://127.0.0.1:5500")
 	public ResponseEntity<List<Task>> list() {
 		if(cart.list().isEmpty()) {
 			return ResponseEntity.notFound().build(); 
 		}
 		return ResponseEntity.ok(cart.list());
 	}
+
+    /**
+     * Adiciona uma nova lista.
+     * 
+     * @param item o item a ser adicionado
+     * @return um ResponseEntity com status CREATED
+     */
+	
+    @PostMapping("/change/{id}")
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    public ResponseEntity<Void> changeList(@PathVariable("id") Integer id) {
+    	cart.changeList(id);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
 
     /**
      * Adiciona um novo item ao carrinho.
@@ -76,6 +93,7 @@ public class CartController {
      */
 	
     @PostMapping("/")
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     public ResponseEntity<Void> create(@RequestBody Item item) {
     	item.defaultAtributes();
     	cart.create(item);
@@ -91,6 +109,7 @@ public class CartController {
      */
 
     @PutMapping("/edit/{title}")
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     public ResponseEntity<Void> updateTask(@PathVariable("title") String title, @RequestBody Item item) {
         cart.edit(title, item);
         return ResponseEntity.ok().build();
@@ -103,6 +122,7 @@ public class CartController {
      */
     
     @DeleteMapping("/delete/{title}")
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     public ResponseEntity<Void> deleteTask(@PathVariable("title") String title) {
         cart.delete(title);
         return ResponseEntity.ok().build();

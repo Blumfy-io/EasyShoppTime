@@ -17,7 +17,23 @@ import project_interfaces.TaskList;
 @Service
 public class CartService implements TaskList {
 
-	private List<Task> itens = new ArrayList<>();
+	private List<List<Task>> lists = new ArrayList<>();
+
+	private List<Task> itens = null;
+	
+
+	public void createList(List<Task> list) {
+		lists.add(list);
+		itens = list;
+	}
+
+	public void changeList(int index) {
+        if (index >= 0 && index < lists.size()) {
+            itens = lists.get(index);
+        } else {
+        	createList(new ArrayList<>());
+        }
+	}
 
 	 /**
      * Marca uma tarefa como concluída.
@@ -27,6 +43,7 @@ public class CartService implements TaskList {
 
 	@Override
 	public void done(String title) {
+		if(itens == null) createList(new ArrayList<>());
 		findByTitle(title).setIsDone(true);
 
 		 /**
@@ -39,6 +56,7 @@ public class CartService implements TaskList {
 
 	@Override
 	public void create(Task task) {
+		if(itens == null) createList(new ArrayList<>());
 		itens.add(task);
 
 	}
@@ -62,6 +80,7 @@ public class CartService implements TaskList {
 
 	@Override
 	public void delete(String title) {
+		if(itens == null) createList(new ArrayList<>());
 		itens.remove(findByTitle(title));
 	}
 
@@ -74,6 +93,7 @@ public class CartService implements TaskList {
 
 	@Override
 	public void edit(String title, Task task) {
+		if(itens == null) createList(new ArrayList<>());
 		Task original = findByTitle(title);
 
 		Class<?> classe = original.getClass();
