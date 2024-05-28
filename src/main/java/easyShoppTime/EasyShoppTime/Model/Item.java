@@ -23,15 +23,20 @@ public class Item implements Task{
     private String typeTask;
 
 
-	public Item(Integer userID, String userUuid, String title, String tag, String description, String typeTask, int qtd) {
+	public Item(String userUuid, String title, String tag, int qtd) {
 		super();
-		this.userID = userID;
 		this.userUuid = userUuid;
 		this.title = title;
 		this.tag = tag;
-		this.description = description;
-		this.typeTask = typeTask;
 		this.qtd = qtd;
+		defaultAtributes();
+	}
+
+
+	public void defaultAtributes() {
+		this.userID = null;
+		this.description = "";
+		this.typeTask = "Compra";
 		this.status = 1;
 		this.priority = 0;
 		this.isDelete = false;

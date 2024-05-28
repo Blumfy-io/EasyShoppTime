@@ -78,7 +78,7 @@
 	<repositories>
 		<repository>
 			<id>internal-repo</id>
-			<url>http://your-internal-repo/repository/maven-public/</url>
+			<url>C:\Users\candi_k10mf5y\.m2\repository\Blumfy-io\TaskList\1.0-SNAPSHOT</url>
 		</repository>
 	</repositories>
 

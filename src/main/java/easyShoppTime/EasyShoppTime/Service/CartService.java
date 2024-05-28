@@ -1,7 +1,6 @@
 package easyShoppTime.EasyShoppTime.Service;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +48,9 @@ public class CartService implements TaskList {
 			field.setAccessible(true);
 			try {
 				Object newValue = field.get(task);
-				field.set(original, newValue);
+				if (newValue != null) {
+					field.set(original, newValue);
+				}
 			} catch (IllegalAccessException e) {
 				e.printStackTrace();
 				throw new RuntimeException("Failed to edit task", e);
@@ -60,38 +61,12 @@ public class CartService implements TaskList {
 	public Task findByTitle(String title) {
 		return itens.stream().filter(item -> item.getTitle().equals(title)).findFirst().orElse(null);
 	}
-	
+
 	public void finish() {
-		// TODO Esse é o metodo que vai salvar a lista no bancco de dados para que o usuario tenha seu historico de compras
+		// TODO Esse é o metodo que vai salvar a lista no bancco de dados para que o
+		// usuario tenha seu historico de compras
 
 	}
-
-	public void changeQtd(String title, int qtd) {
-		Task original = findByTitle(title);
-
-		Class<?> classe = original.getClass();
-
-		try {
-			classe.getMethod("setQtd", Integer.class).invoke(original, qtd);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-
-
-	}
-
-	
 
 	@Override
 	public void start(String title) {
