@@ -5,6 +5,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import project_interfaces.Task;
 
+/**
+ * Representa um item no carrinho de compras.
+ * Implementa a interface Task, que representa uma tarefa.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,6 +37,10 @@ public class Item implements Task{
 		defaultAtributes();
 	}
 
+  /**
+     * Define os atributos padrão para o item.
+     * Inicializa o status de conclusão como falso e o tipo de tarefa como "default".
+     */
 
 	public void defaultAtributes() {
 		this.userID = null;
@@ -73,9 +82,22 @@ public class Item implements Task{
     }
 
     // Getters e Setters para title
+
+      /**
+     * Obtém o título do item.
+     * 
+     * @return o título
+     */
+
     public String getTitle() {
         return title;
     }
+
+        /**
+     * Define o título do item.
+     * 
+     * @param title o título a ser definido
+     */
 
     public void setTitle(String title) {
         this.title = title;
@@ -91,9 +113,23 @@ public class Item implements Task{
     }
 
     // Getters e Setters para description
+
+    
+    /**
+     * Obtém a descrição do item.
+     * 
+     * @return a descrição
+     */
+
     public String getDescription() {
         return description;
     }
+
+/**
+     * Define a descrição do item.
+     * 
+     * @param description a descrição a ser definida
+     */
 
     public void setDescription(String description) {
         this.description = description;
@@ -118,6 +154,13 @@ public class Item implements Task{
     }
 
     // Getters e Setters para isDelete
+
+  /**
+     * Verifica se o item está concluído.
+     * 
+     * @return true se o item estiver concluído, false caso contrário
+     */
+
     public Boolean getIsDelete() {
         return isDelete;
     }
@@ -131,14 +174,33 @@ public class Item implements Task{
         return isDone;
     }
 
+     /**
+     * Define o status de conclusão do item.
+     * 
+     * @param isDone o status de conclusão a ser definido
+     */
+
     public void setIsDone(Boolean isDone) {
         this.isDone = isDone;
     }
 
     // Getters e Setters para typeTask
+
+    /**
+     * Obtém o tipo da tarefa.
+     * 
+     * @return o tipo da tarefa
+     */
+
     public String getTypeTask() {
         return typeTask;
     }
+
+    /**
+     * Define o tipo da tarefa.
+     * 
+     * @param typeTask o tipo a ser definido
+     */
 
     public void setTypeTask(String typeTask) {
         this.typeTask = typeTask;
